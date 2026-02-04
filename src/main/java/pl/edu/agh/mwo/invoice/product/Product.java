@@ -3,21 +3,20 @@ package pl.edu.agh.mwo.invoice.product;
 import java.math.BigDecimal;
 
 public abstract class Product {
+
     private final String name;
-
     private final BigDecimal price;
-
     private final BigDecimal taxPercent;
 
     protected Product(String name, BigDecimal price, BigDecimal tax) {
         if (name == null) {
-            throw new IllegalArgumentException("Product name is null");
+            throw new IllegalArgumentException("Product name cannot be null");
         }
         if (name.isEmpty()) {
-            throw new IllegalArgumentException("Product name is empty");
+            throw new IllegalArgumentException("Product name cannot be empty");
         }
         if (price == null) {
-            throw new IllegalArgumentException("Product price is null");
+            throw new IllegalArgumentException("Product price cannot be null");
         }
         if (price.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException("Product price cannot be negative");
@@ -38,6 +37,7 @@ public abstract class Product {
     }
 
     public BigDecimal getTaxPercent() {
+
         return taxPercent;
     }
 

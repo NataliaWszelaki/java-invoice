@@ -1,25 +1,32 @@
 package pl.edu.agh.mwo.invoice;
 
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 import pl.edu.agh.mwo.invoice.product.Product;
 
 public class Invoice {
-    private HashMap<Product, Integer> products = new HashMap<>();
+
+    private Map<Product, Integer> products = new HashMap<>();
 
     public void addProduct(Product product) {
+
+        if (product == null) {
+            throw new IllegalArgumentException("Product cannot be null");
+        }
         products.put(product, products.getOrDefault(product, 0) + 1);
     }
 
     public void addProduct(Product product, Integer quantity) {
 
+        if (product == null) {
+            throw new IllegalArgumentException("Product cannot be null");
+        }
         if (quantity <= 0) {
             throw new IllegalArgumentException("Product quantity must be greater than zero");
         }
-        products.put(product, quantity);
+        products.put(product, products.getOrDefault(product, 0) + quantity);
     }
 
     public BigDecimal getSubtotal() {
