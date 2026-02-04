@@ -2,11 +2,13 @@ package pl.edu.agh.mwo.invoice;
 
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import pl.edu.agh.mwo.invoice.product.Product;
 
 public class Invoice {
-    private Collection<Product> products;
+    private HashMap<Product, Integer> products = new HashMap<>();
 
     public void addProduct(Product product) {
         // TODO: implement
@@ -17,7 +19,12 @@ public class Invoice {
     }
 
     public BigDecimal getSubtotal() {
-        return null;
+
+        BigDecimal subtotal = BigDecimal.ZERO;
+        for (Map.Entry<Product, Integer> entry : products.entrySet() ) {
+            subtotal = subtotal.add(entry.getKey().getPrice().multiply(BigDecimal.valueOf(entry.getValue())));
+        }
+        return subtotal;
     }
 
     public BigDecimal getTax() {
