@@ -11,7 +11,7 @@ public class Invoice {
     private HashMap<Product, Integer> products = new HashMap<>();
 
     public void addProduct(Product product) {
-        // TODO: implement
+        products.put(product, products.getOrDefault(product, 0) + 1);
     }
 
     public void addProduct(Product product, Integer quantity) {
