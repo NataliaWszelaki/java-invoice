@@ -22,13 +22,22 @@ public class Invoice {
 
         BigDecimal subtotal = BigDecimal.ZERO;
         for (Map.Entry<Product, Integer> entry : products.entrySet() ) {
-            subtotal = subtotal.add(entry.getKey().getPrice().multiply(BigDecimal.valueOf(entry.getValue())));
+            Product product = entry.getKey();
+            int quantity = entry.getValue();
+            subtotal = subtotal.add(product.getPrice().multiply(BigDecimal.valueOf(quantity)));
         }
         return subtotal;
     }
 
     public BigDecimal getTax() {
-        return null;
+
+        BigDecimal tax = BigDecimal.ZERO;
+        for (Map.Entry<Product, Integer> entry : products.entrySet() ) {
+            Product product = entry.getKey();
+            int quantity = entry.getValue();
+            tax =  tax.add(product.getPrice().multiply(BigDecimal.valueOf(quantity)).multiply(product.getTaxPercent()));
+        }
+        return tax;
     }
 
     public BigDecimal getTotal() {
