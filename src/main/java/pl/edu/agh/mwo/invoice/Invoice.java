@@ -15,7 +15,7 @@ public class Invoice {
     }
 
     public void addProduct(Product product, Integer quantity) {
-        // TODO: implement
+        products.put(product, quantity);
     }
 
     public BigDecimal getSubtotal() {
