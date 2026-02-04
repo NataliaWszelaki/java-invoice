@@ -20,7 +20,7 @@ public abstract class Product {
             throw new IllegalArgumentException("Product price is null");
         }
         if (price.compareTo(BigDecimal.ZERO) < 0) {
-            throw new IllegalArgumentException("Price cannot be negative");
+            throw new IllegalArgumentException("Product price cannot be negative");
         }
         this.name = name;
         this.price = price;

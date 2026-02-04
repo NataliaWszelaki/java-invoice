@@ -15,6 +15,10 @@ public class Invoice {
     }
 
     public void addProduct(Product product, Integer quantity) {
+
+        if (quantity == 0) {
+            throw new IllegalArgumentException("Product quantity cannot be 0");
+        }
         products.put(product, quantity);
     }
 
