@@ -167,4 +167,12 @@ public class InvoiceTest {
         Assert.assertTrue(invoiceNumber.startsWith("FV/" + currentYear + "/"));
         Assert.assertTrue(number > 0);
     }
+
+    @Test
+    public void printEmptyInvoiceWithNumber() {
+        Invoice invoice = new Invoice();
+        String printedInvoice = invoice.print();
+        Assert.assertNotNull(printedInvoice);
+        Assert.assertFalse(printedInvoice.contains(invoice.getNumber()));
+    }
 }
