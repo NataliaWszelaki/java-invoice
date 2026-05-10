@@ -1,6 +1,7 @@
 package pl.edu.agh.mwo.invoice;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import org.hamcrest.Matchers;
 import org.junit.Assert;
@@ -12,6 +13,8 @@ import pl.edu.agh.mwo.invoice.product.DairyProduct;
 import pl.edu.agh.mwo.invoice.product.OtherProduct;
 import pl.edu.agh.mwo.invoice.product.Product;
 import pl.edu.agh.mwo.invoice.product.TaxFreeProduct;
+
+import static java.lang.Integer.parseInt;
 
 public class InvoiceTest {
     private Invoice invoice;
@@ -129,7 +132,7 @@ public class InvoiceTest {
     @Test
     public void testInvoiceHasNumber() {
         Invoice invoice = new Invoice();
-        Assert.assertEquals(1, invoice.getNumber());
+        Assert.assertTrue(invoice.getNumber() > 0);
     }
 
     @Test
@@ -148,5 +151,17 @@ public class InvoiceTest {
         int invoiceNumber2 = invoice.getNumber();
 
         Assert.assertEquals(invoiceNumber1, invoiceNumber2);
+    }
+
+    @Test
+    public void testInvoiceNumberHasFormat() {
+        Invoice invoice = new Invoice();
+
+        String invoiceNumber = invoice.getNumber();
+        int number = parseInt(invoiceNumber.substring(8));
+        int currentYear = LocalDate.now().getYear();
+
+        Assert.assertTrue(invoiceNumber.startsWith("FV/" + currentYear + "/"));
+        Assert.assertTrue(number > 0);
     }
 }
