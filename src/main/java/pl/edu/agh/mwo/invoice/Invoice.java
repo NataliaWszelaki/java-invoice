@@ -1,6 +1,7 @@
 package pl.edu.agh.mwo.invoice;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,10 +10,11 @@ import pl.edu.agh.mwo.invoice.product.Product;
 public class Invoice {
 
     private static int nextNumber = 0;
-    private int number;
+    private String number;
+    int currentYear = LocalDate.now().getYear();
 
     public Invoice() {
-        number = nextNumber++;
+        number = "FV/" + currentYear + "/" + nextNumber++;
     }
 
     private Map<Product, Integer> products = new HashMap<>();
@@ -64,7 +66,7 @@ public class Invoice {
         return getSubtotal().add(getTax());
     }
 
-    public int getNumber() {
+    public String getNumber() {
 
         return number;
     }

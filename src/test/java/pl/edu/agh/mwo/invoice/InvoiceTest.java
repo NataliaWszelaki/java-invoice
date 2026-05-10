@@ -132,7 +132,10 @@ public class InvoiceTest {
     @Test
     public void testInvoiceHasNumber() {
         Invoice invoice = new Invoice();
-        Assert.assertTrue(invoice.getNumber() > 0);
+        String invoiceNumber = invoice.getNumber();
+        int number = parseInt(invoiceNumber.substring(8));
+
+        Assert.assertTrue(number > 0);
     }
 
     @Test
@@ -147,8 +150,8 @@ public class InvoiceTest {
     public void invoiceNumberShouldNotChange() {
         Invoice invoice = new Invoice();
 
-        int invoiceNumber1 = invoice.getNumber();
-        int invoiceNumber2 = invoice.getNumber();
+        String invoiceNumber1 = invoice.getNumber();
+        String invoiceNumber2 = invoice.getNumber();
 
         Assert.assertEquals(invoiceNumber1, invoiceNumber2);
     }
