@@ -139,4 +139,14 @@ public class InvoiceTest {
 
         Assert.assertNotEquals(invoice1.getNumber(), invoice2.getNumber());
     }
+
+    @Test
+    public void invoiceNumberShouldNotChange() {
+        Invoice invoice = new Invoice();
+
+        int invoiceNumber1 = invoice.getNumber();
+        int invoiceNumber2 = invoice.getNumber();
+
+        Assert.assertEquals(invoiceNumber1, invoiceNumber2);
+    }
 }
