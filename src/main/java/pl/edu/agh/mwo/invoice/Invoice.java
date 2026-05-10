@@ -8,7 +8,9 @@ import pl.edu.agh.mwo.invoice.product.Product;
 
 public class Invoice {
 
+    private static int nextNumber = 1;
     private int number;
+
     private Map<Product, Integer> products = new HashMap<>();
 
     public void addProduct(Product product) {
@@ -59,6 +61,8 @@ public class Invoice {
     }
 
     public int getNumber() {
-        return 1;
+
+        number = nextNumber++;
+        return number;
     }
 }
