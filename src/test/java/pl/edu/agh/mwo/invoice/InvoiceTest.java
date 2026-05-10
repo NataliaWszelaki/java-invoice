@@ -8,7 +8,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import pl.edu.agh.mwo.invoice.Invoice;
 import pl.edu.agh.mwo.invoice.product.DairyProduct;
 import pl.edu.agh.mwo.invoice.product.OtherProduct;
 import pl.edu.agh.mwo.invoice.product.Product;
@@ -131,25 +130,23 @@ public class InvoiceTest {
 
     @Test
     public void testInvoiceHasNumber() {
-        Invoice invoice = new Invoice();
         String invoiceNumber = invoice.getNumber();
-        int number = parseInt(invoiceNumber.substring(8));
+        int currentYear = LocalDate.now().getYear();
+        String prefix = "FV/" + currentYear + "/";
+        int number = parseInt(invoiceNumber.substring(prefix.length()));
 
         Assert.assertTrue(number > 0);
     }
 
     @Test
     public void testTwoInvoicesHaveDifferentNumber() {
-        Invoice invoice1 = new Invoice();
         Invoice invoice2 = new Invoice();
 
-        Assert.assertNotEquals(invoice1.getNumber(), invoice2.getNumber());
+        Assert.assertNotEquals(invoice.getNumber(), invoice2.getNumber());
     }
 
     @Test
-    public void invoiceNumberShouldNotChange() {
-        Invoice invoice = new Invoice();
-
+    public void testInvoiceNumberShouldNotChange() {
         String invoiceNumber1 = invoice.getNumber();
         String invoiceNumber2 = invoice.getNumber();
 
@@ -158,21 +155,19 @@ public class InvoiceTest {
 
     @Test
     public void testInvoiceNumberHasFormat() {
-        Invoice invoice = new Invoice();
-
         String invoiceNumber = invoice.getNumber();
-        int number = parseInt(invoiceNumber.substring(8));
         int currentYear = LocalDate.now().getYear();
+        String prefix = "FV/" + currentYear + "/";
+        int number = parseInt(invoiceNumber.substring(prefix.length()));
 
         Assert.assertTrue(invoiceNumber.startsWith("FV/" + currentYear + "/"));
         Assert.assertTrue(number > 0);
     }
 
     @Test
-    public void printEmptyInvoiceWithNumber() {
-        Invoice invoice = new Invoice();
+    public void testPrintEmptyInvoiceWithNumber() {
         String printedInvoice = invoice.print();
         Assert.assertNotNull(printedInvoice);
-        Assert.assertFalse(printedInvoice.contains(invoice.getNumber()));
+        Assert.assertTrue(printedInvoice.contains(invoice.getNumber()));
     }
 }

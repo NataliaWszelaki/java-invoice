@@ -70,4 +70,9 @@ public class Invoice {
 
         return number;
     }
+
+    public String print() {
+        String printedInvoice = number + "/n";
+        return printedInvoice;
+    }
 }
