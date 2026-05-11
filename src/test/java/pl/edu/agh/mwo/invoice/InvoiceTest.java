@@ -199,4 +199,17 @@ public class InvoiceTest {
 
         Assert.assertTrue(printedInvoice.contains("Liczba pozycji: 3"));
     }
+
+    @Test
+    public void testAddingSameProductShouldIncreaseQuantity() {
+        // 2x chleb
+        invoice.addProduct(new TaxFreeProduct("Chleb", new BigDecimal("5")), 2);
+        // 4x chleb
+        invoice.addProduct(new TaxFreeProduct("Chleb", new BigDecimal("5")), 4);
+
+        String printedInvoice = invoice.print();
+
+        Assert.assertTrue(printedInvoice.contains("Chleb 6 5"));
+        Assert.assertTrue(printedInvoice.contains("Liczba pozycji: 1"));
+    }
 }
