@@ -86,6 +86,8 @@ public class Invoice {
                     .append(product.getPrice())
                     .append("\n");
         }
+        sb.append("Liczba pozycji: ")
+                .append(products.size());
         return sb.toString();
     }
 }
