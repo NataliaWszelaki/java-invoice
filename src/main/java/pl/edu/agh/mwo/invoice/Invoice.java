@@ -9,7 +9,7 @@ import pl.edu.agh.mwo.invoice.product.Product;
 
 public class Invoice {
 
-    private static int nextNumber = 0;
+    private static int nextNumber = 1;
     private String number;
     int currentYear = LocalDate.now().getYear();
 
@@ -72,7 +72,21 @@ public class Invoice {
     }
 
     public String print() {
-        String printedInvoice = number + "/n";
-        return printedInvoice;
+        StringBuilder sb = new StringBuilder();
+        sb.append(number)
+                .append("\n");
+
+        for (Map.Entry<Product, Integer> entry : products.entrySet()) {
+            Product product = entry.getKey();
+            int quantity = entry.getValue();
+            sb.append(product.getName())
+                    .append(" ")
+                    .append(quantity)
+                    .append(" ")
+                    .append(product.getPrice())
+                    .append("\n");
+        }
+        System.out.println(sb.toString());
+        return sb.toString();
     }
 }

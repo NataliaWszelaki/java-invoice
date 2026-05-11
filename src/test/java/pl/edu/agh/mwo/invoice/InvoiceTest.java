@@ -180,6 +180,10 @@ public class InvoiceTest {
         String printedInvoice = invoice.print();
         Assert.assertTrue(printedInvoice.contains(invoice.getNumber()));
         Assert.assertTrue(printedInvoice.contains("Kubek"));
+        Assert.assertTrue(printedInvoice.contains("5"));
+        Assert.assertTrue(printedInvoice.contains("2"));
         Assert.assertTrue(printedInvoice.contains("Kozi Serek"));
+        Assert.assertTrue(printedInvoice.contains("10"));
+        Assert.assertTrue(printedInvoice.contains("3"));
     }
 }
