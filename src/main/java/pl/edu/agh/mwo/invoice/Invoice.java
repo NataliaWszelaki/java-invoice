@@ -86,7 +86,6 @@ public class Invoice {
                     .append(product.getPrice())
                     .append("\n");
         }
-        System.out.println(sb.toString());
         return sb.toString();
     }
 }
