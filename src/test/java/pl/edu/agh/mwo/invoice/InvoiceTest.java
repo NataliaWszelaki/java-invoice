@@ -133,6 +133,7 @@ public class InvoiceTest {
         String invoiceNumber = invoice.getNumber();
         int currentYear = LocalDate.now().getYear();
         String prefix = "FV/" + currentYear + "/";
+
         int number = parseInt(invoiceNumber.substring(prefix.length()));
 
         Assert.assertTrue(number > 0);
@@ -156,28 +157,30 @@ public class InvoiceTest {
     @Test
     public void testInvoiceNumberHasFormat() {
         String invoiceNumber = invoice.getNumber();
+
         int currentYear = LocalDate.now().getYear();
         String prefix = "FV/" + currentYear + "/";
         int number = parseInt(invoiceNumber.substring(prefix.length()));
 
-        Assert.assertTrue(invoiceNumber.startsWith("FV/" + currentYear + "/"));
+        Assert.assertTrue(invoiceNumber.startsWith(prefix));
         Assert.assertTrue(number > 0);
     }
 
     @Test
     public void testPrintEmptyInvoiceWithNumber() {
         String printedInvoice = invoice.print();
+
         Assert.assertNotNull(printedInvoice);
         Assert.assertTrue(printedInvoice.contains(invoice.getNumber()));
     }
 
     @Test
     public void testPrintInvoiceWithNumberAndProducts() {
-        // 2x kubek - price: 10
         invoice.addProduct(new TaxFreeProduct("Kubek", new BigDecimal("5")), 2);
-        // 3x kozi serek - price: 30
         invoice.addProduct(new DairyProduct("Kozi Serek", new BigDecimal("10")), 3);
+
         String printedInvoice = invoice.print();
+
         Assert.assertTrue(printedInvoice.contains(invoice.getNumber()));
         Assert.assertTrue(printedInvoice.contains("Kubek"));
         Assert.assertTrue(printedInvoice.contains("5"));
@@ -189,12 +192,10 @@ public class InvoiceTest {
 
     @Test
     public void testPrintInvoiceWithNumberOfItems() {
-        // 2x chleb - price with tax: 10
         invoice.addProduct(new TaxFreeProduct("Chleb", new BigDecimal("5")), 2);
-        // 3x chedar - price with tax: 32.40
         invoice.addProduct(new DairyProduct("Chedar", new BigDecimal("10")), 3);
-        // 1000x pinezka - price with tax: 12.30
         invoice.addProduct(new OtherProduct("Pinezka", new BigDecimal("0.01")), 1000);
+
         String printedInvoice = invoice.print();
 
         Assert.assertTrue(printedInvoice.contains("Liczba pozycji: 3"));
@@ -202,9 +203,7 @@ public class InvoiceTest {
 
     @Test
     public void testAddingSameProductShouldIncreaseQuantity() {
-        // 2x chleb
         invoice.addProduct(new TaxFreeProduct("Chleb", new BigDecimal("5")), 2);
-        // 4x chleb
         invoice.addProduct(new TaxFreeProduct("Chleb", new BigDecimal("5")), 4);
 
         String printedInvoice = invoice.print();

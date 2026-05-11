@@ -64,8 +64,8 @@ public class ProductTest {
 
     @Test
     public void testProductNameAndPriceWithFuelCanister() {
-        Product product = new FuelCanister("Riesling", new BigDecimal("40.0"));
-        Assert.assertEquals("Riesling", product.getName());
-        Assert.assertThat(new BigDecimal("40"), Matchers.comparesEqualTo(product.getPrice()));
+        Product product = new FuelCanister("Diesel", new BigDecimal("6.00"));
+        Assert.assertEquals("Diesel", product.getName());
+        Assert.assertThat(new BigDecimal("6.00"), Matchers.comparesEqualTo(product.getPrice()));
     }
 }
