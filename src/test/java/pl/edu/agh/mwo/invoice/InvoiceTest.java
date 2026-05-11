@@ -170,4 +170,16 @@ public class InvoiceTest {
         Assert.assertNotNull(printedInvoice);
         Assert.assertTrue(printedInvoice.contains(invoice.getNumber()));
     }
+
+    @Test
+    public void testPrintInvoiceWithNumberAndProducts() {
+        // 2x kubek - price: 10
+        invoice.addProduct(new TaxFreeProduct("Kubek", new BigDecimal("5")), 2);
+        // 3x kozi serek - price: 30
+        invoice.addProduct(new DairyProduct("Kozi Serek", new BigDecimal("10")), 3);
+        String printedInvoice = invoice.print();
+        Assert.assertTrue(printedInvoice.contains(invoice.getNumber()));
+        Assert.assertTrue(printedInvoice.contains("Kubek"));
+        Assert.assertTrue(printedInvoice.contains("Kozi Serek"));
+    }
 }
