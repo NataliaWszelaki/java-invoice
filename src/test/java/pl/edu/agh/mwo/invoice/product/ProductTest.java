@@ -102,6 +102,6 @@ public class ProductTest {
     @Test
     public void testProductTaxValueWithFuelCanister() {
         Product product = new FuelCanister("20L Diesel Canister", new BigDecimal("120.00"));
-        Assert.assertThat(new BigDecimal("5.56"), Matchers.comparesEqualTo(product.getTaxValue));
+        Assert.assertThat(new BigDecimal("5.56"), Matchers.comparesEqualTo(product.getTaxValue()));
     }
 }
