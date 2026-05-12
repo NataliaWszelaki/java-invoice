@@ -55,8 +55,9 @@ public class Invoice {
         for (Map.Entry<Product, Integer> entry : products.entrySet()) {
             Product product = entry.getKey();
             int quantity = entry.getValue();
-            tax =  tax.add(product.getPrice().multiply(BigDecimal.valueOf(quantity))
-                    .multiply(product.getTaxPercent()));
+            tax =  tax.add(product.getPriceWithTax()
+                    .subtract(product.getPrice())
+                    .multiply(BigDecimal.valueOf(quantity)));
         }
         return tax;
     }
