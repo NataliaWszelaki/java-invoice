@@ -49,7 +49,7 @@ public abstract class Product {
 
     public BigDecimal getPriceWithTax() {
 
-        return price.add(price.multiply(getTaxPercent()));
+        return price.add(price.multiply(getTaxPercent())).add(getExciseTax());
     }
 
     @Override
