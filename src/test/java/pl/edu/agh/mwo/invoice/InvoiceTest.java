@@ -8,10 +8,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import pl.edu.agh.mwo.invoice.product.DairyProduct;
-import pl.edu.agh.mwo.invoice.product.OtherProduct;
-import pl.edu.agh.mwo.invoice.product.Product;
-import pl.edu.agh.mwo.invoice.product.TaxFreeProduct;
+import pl.edu.agh.mwo.invoice.product.*;
 
 import static java.lang.Integer.parseInt;
 
@@ -210,5 +207,19 @@ public class InvoiceTest {
 
         Assert.assertTrue(printedInvoice.contains("Chleb 6 5"));
         Assert.assertTrue(printedInvoice.contains("Liczba pozycji: 1"));
+    }
+
+    @Test
+    public void testInvoiceHasProperTaxValueForBottleOfWine() {
+        invoice.addProduct(new BottleOfWine("Riesling", new BigDecimal("40.0")), 2);
+
+        Assert.assertThat(new BigDecimal("29.52"), Matchers.comparesEqualTo(invoice.getTax()));
+    }
+
+    @Test
+    public void testInvoiceHasProperTaxValueForFuelCanister() {
+        invoice.addProduct(new FuelCanister("20L Diesel Canister", new BigDecimal("120")), 5);
+
+        Assert.assertThat(new BigDecimal("27.80"), Matchers.comparesEqualTo(invoice.getTax()));
     }
 }
