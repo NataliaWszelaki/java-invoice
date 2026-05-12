@@ -83,13 +83,13 @@ public class ProductTest {
 
     @Test
     public void testProductPriceWithTaxWithBottleOfWine() {
-        Product product = new BottleOfWine("Riesling", new BigDecimal("54.76"));
-        Assert.assertThat(new BigDecimal("108"), Matchers.comparesEqualTo(product.getPriceWithTax()));
+        Product product = new BottleOfWine("Riesling", new BigDecimal("40.00"));
+        Assert.assertThat(new BigDecimal("54.76"), Matchers.comparesEqualTo(product.getPriceWithTax()));
     }
 
     @Test
     public void testProductPriceWithTaxWithFuelCanister() {
-        Product product = new FuelCanister("20L Diesel Canister", new BigDecimal("125.56"));
-        Assert.assertThat(new BigDecimal("108"), Matchers.comparesEqualTo(product.getPriceWithTax()));
+        Product product = new FuelCanister("20L Diesel Canister", new BigDecimal("120.00"));
+        Assert.assertThat(new BigDecimal("125.56"), Matchers.comparesEqualTo(product.getPriceWithTax()));
     }
 }

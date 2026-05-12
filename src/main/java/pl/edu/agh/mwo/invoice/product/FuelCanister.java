@@ -11,6 +11,7 @@ public class FuelCanister extends Product {
         exciseTax = new BigDecimal("5.56");
     }
 
+    @Override
     public BigDecimal getExciseTax() {
         return exciseTax;
     }
